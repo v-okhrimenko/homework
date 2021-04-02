@@ -1,4 +1,3 @@
-import java.util.Random;
 
 public class Main {
 
@@ -32,6 +31,5 @@ public class Main {
         System.out.println("___DELETE BY STRING___");
         ssc.delete("C");
         System.out.println(ssc.toString());
-
     }
 }
