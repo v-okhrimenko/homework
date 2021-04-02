@@ -11,7 +11,6 @@ public class Main {
         System.out.println(ssc.toString());
 
         System.out.println("___ADD_BY_INDEX___");
-
         ssc.add(1,"D");
         ssc.add(3,"E");
         System.out.println(ssc.toString());

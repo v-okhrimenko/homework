@@ -79,10 +79,8 @@ public class SimpleStringCollection {
         sb.append("[");
         for (int i = 0; i < stringObject.length; i++) {
             if (i != index - 1) {
-                //sb.append(stringObject[i]).append(":").append(i).append(", ");
                 sb.append(stringObject[i]).append(", ");
             } else {
-                //sb.append(stringObject[i]).append(":").append(i).append("]");
                 sb.append(stringObject[i]).append("]");
             }
         }
