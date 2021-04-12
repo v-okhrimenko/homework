@@ -27,7 +27,7 @@ public class QuadraticEquation {
 
     }
 
-    public static boolean checkString(String txt) {
+    private static boolean checkString(String txt) {
         String[] sm = txt.split(" ");
         if (sm.length < 4) {
             System.out.println("Введите правильное уровнение...");
@@ -36,7 +36,7 @@ public class QuadraticEquation {
         return true;
     }
 
-    public static void result(String v) {
+    private static void result(String v) {
 
         String[] sm = v.split(" ");
         String fElement = sm[0];
@@ -59,7 +59,7 @@ public class QuadraticEquation {
         }
     }
 
-    public static void v1(String[] mass) {
+    private static void v1(String[] mass) {
         double x1 = Math.sqrt(Double.parseDouble(mass[2]));
         double x2 = x1 * -1;
         System.out.println("Результат: ");
@@ -67,7 +67,7 @@ public class QuadraticEquation {
         noExit = false;
     }
 
-    public static void v2(String[] mass) {
+    private static void v2(String[] mass) {
 
         String firstElement = (mass[2].indexOf("x") == 0) ? "1" : mass[2].substring(0, mass[2].indexOf("x"));
         String secondElement = (mass[0].indexOf("x") == 0) ? "1" : mass[0].substring(0, mass[0].indexOf("x"));
@@ -138,7 +138,7 @@ public class QuadraticEquation {
         calculate(firstElement, secondElement, thirdElement);
     }
 
-    public static void calculate(String sA, String sB, String sC) {
+    private static void calculate(String sA, String sB, String sC) {
 
         double a = Double.parseDouble(sA);
         double b = Double.parseDouble(sB);
