@@ -10,7 +10,7 @@ public class QuadraticEquation {
             System.out.println("____________________________________________");
             System.out.println("| x^2 + 2x - 4 = 0     |  x^2 - 16 = 0     |");
             System.out.println("|----------------------|-------------------|");
-            System.out.println("| -2x^2 - 3x + 0.1 = 0 |  4x^2 - 12x = -9  |");
+            System.out.println("| x^2 - 3x + 0.1 = 0 |  4x^2 - 12x = -9  |");
             System.out.println("|----------------------|-------------------|");
             System.out.println("| -x^2 - 3x + 0.1 = 0  |  4x + 2x^2 = 16   |");
             System.out.println("--------------------------------------------");
