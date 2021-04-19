@@ -7,6 +7,7 @@
     <groupId>org.example</groupId>
     <artifactId>HW12-DZ13</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -14,7 +15,6 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <properties>

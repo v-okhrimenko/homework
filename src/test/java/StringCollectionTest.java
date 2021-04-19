@@ -1,123 +1,109 @@
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class StringCollectionTest {
     private StringCollectionObject stringCollectionObject;
+    private final String sb = "Test string ";
+
 
     @Before
-    public void initArray() {
+    public void setUp() {
         stringCollectionObject = new StringCollectionObject();
     }
 
+    @After
+    public void tearDown() {
+        stringCollectionObject = null;
+    }
+
+    private StringCollectionObject fillStringCollection() {
+        StringCollectionObject scO = new StringCollectionObject();
+        for (int i = 0; i < 10; i++) {
+            scO.add(sb + i);
+        }
+        return scO;
+    }
+
     @Test
-    public void addObject() {
-        String sb = "Test string ";
+    public void addObjectTest() {
         int startIndex = 0;
         for (int i = 0; i < 100; i++) {
             startIndex++;
-            Assert.assertTrue(stringCollectionObject.add(sb + i));
-            Assert.assertFalse(stringCollectionObject.add(null));
-            Assert.assertFalse(stringCollectionObject.add(1));
-            Assert.assertTrue(stringCollectionObject.contain(sb + i));
-            Assert.assertEquals(stringCollectionObject.size(), startIndex);
+            assertTrue(stringCollectionObject.add(sb + i));
+            assertFalse(stringCollectionObject.add(null));
+            assertFalse(stringCollectionObject.add(1));
+            assertTrue(stringCollectionObject.contain(sb + i));
+            assertEquals(stringCollectionObject.size(), startIndex);
         }
     }
 
     @Test
-    public void addObjectPosition() {
-        String sb = "Test string with index ";
+    public void addObjectPositionTest() {
         int startIndex = 0;
         for (int i = 0; i < 100; i++) {
             startIndex++;
-            Assert.assertTrue(stringCollectionObject.add(i, sb + i));
-            Assert.assertFalse(stringCollectionObject.add(i, null));
-            Assert.assertFalse(stringCollectionObject.add(i, 1));
-            Assert.assertTrue(stringCollectionObject.contain(sb + i));
-            Assert.assertEquals(stringCollectionObject.size(), startIndex);
+            assertTrue(stringCollectionObject.add(i, sb + i));
+            assertFalse(stringCollectionObject.add(i, null));
+            assertFalse(stringCollectionObject.add(i, 1));
+            assertTrue(stringCollectionObject.contain(sb + i));
+            assertEquals(stringCollectionObject.size(), startIndex);
         }
     }
 
     @Test
-    public void contain() {
-        Assert.assertTrue(stringCollectionObject.add("Test string 0"));
-        Assert.assertTrue(stringCollectionObject.add("Test string 1"));
-        Assert.assertTrue(stringCollectionObject.add("Test string 2"));
-        Assert.assertTrue(stringCollectionObject.add("Test string 3"));
-        Assert.assertTrue(stringCollectionObject.add("Test string 4"));
-        Assert.assertTrue(stringCollectionObject.delete("Test string 3"));
-        Assert.assertTrue(stringCollectionObject.contain("Test string 2"));
-        Assert.assertTrue(stringCollectionObject.contain("Test string 0"));
-        Assert.assertFalse(stringCollectionObject.contain("Not this string"));
-        Assert.assertFalse(stringCollectionObject.contain("Test string 3"));
+    public void containTest() {
+        stringCollectionObject = fillStringCollection();
+        assertTrue(stringCollectionObject.delete("Test string 3"));
+        assertFalse(stringCollectionObject.contain("Test string 3"));
+        assertTrue(stringCollectionObject.contain("Test string 2"));
+        assertTrue(stringCollectionObject.contain("Test string 0"));
+        assertFalse(stringCollectionObject.contain("Not this string"));
     }
 
     @Test
-    public void delete() {
-        Assert.assertFalse(stringCollectionObject.delete("not in list"));
-        String sb = "Test string ";
-        int startIndex = 0;
-        for (int i = 0; i < 10; i++) {
-            startIndex++;
-            Assert.assertTrue(stringCollectionObject.add(sb + i));
-            Assert.assertEquals(stringCollectionObject.size(), startIndex);
-        }
-
-        for (int i = 0; i < 10; i++) {
-            startIndex--;
-            Assert.assertTrue(stringCollectionObject.delete(sb + i));
-            Assert.assertEquals(stringCollectionObject.size(), startIndex);
-        }
+    public void deleteTest() {
+        stringCollectionObject = fillStringCollection();
+        assertFalse(stringCollectionObject.delete("not in list"));
+        assertTrue(stringCollectionObject.delete(sb + 1));
+        assertTrue(stringCollectionObject.delete(sb + 2));
+        assertEquals(stringCollectionObject.size(), 8);
     }
 
     @Test
-    public void get() {
-        String sb = "Get string ";
-        for (int i = 0; i < 10; i++) {
-            Assert.assertTrue(stringCollectionObject.add(sb + i));
-        }
-        for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(sb + i, stringCollectionObject.get(i));
-        }
+    public void getTest() {
+        stringCollectionObject = fillStringCollection();
+        assertEquals(sb + 1, stringCollectionObject.get(1));
+        assertEquals(sb + 2, stringCollectionObject.get(2));
+        assertEquals(sb + 3, stringCollectionObject.get(3));
+        assertNull(stringCollectionObject.get(15));
     }
 
     @Test
-    public void size() {
-        for (int i = 0; i < 8; i++) {
-            Assert.assertTrue(stringCollectionObject.add(String.valueOf(i)));
-        }
-        Assert.assertTrue(stringCollectionObject.delete("1"));
-        Assert.assertTrue(stringCollectionObject.delete("2"));
-        Assert.assertEquals(6, stringCollectionObject.size());
+    public void sizeTest() {
+        stringCollectionObject = fillStringCollection();
+        assertTrue(stringCollectionObject.delete(sb + 0));
+        assertTrue(stringCollectionObject.delete(sb + 1));
+        assertEquals(8, stringCollectionObject.size());
     }
 
     @Test
-    public void clear() {
-        for (int i = 0; i < 15; i++) {
-            Assert.assertTrue(stringCollectionObject.add(String.valueOf(i)));
-        }
-        Assert.assertEquals(15, stringCollectionObject.size());
-        Assert.assertTrue(stringCollectionObject.clear());
-        Assert.assertEquals(0, stringCollectionObject.size());
+    public void clearTest() {
+        stringCollectionObject = fillStringCollection();
+        assertEquals(10, stringCollectionObject.size());
+        assertTrue(stringCollectionObject.clear());
+        assertEquals(0, stringCollectionObject.size());
     }
 
     @Test
-    public void equals() {
-        stringCollectionObject.add("1");
-        stringCollectionObject.add("2");
-        stringCollectionObject.add("3");
-        stringCollectionObject.add("4");
-        stringCollectionObject.add("5");
-
+    public void equalsTest() {
+        stringCollectionObject = fillStringCollection();
+        StringCollectionObject stringCollectionObject2 = fillStringCollection();
         StringCollectionObject stringCollectionObject3 = stringCollectionObject;
-        StringCollectionObject stringCollectionObject2 = new StringCollectionObject();
-        stringCollectionObject2.add("1");
-        stringCollectionObject2.add("2");
-        stringCollectionObject2.add("3");
-        stringCollectionObject2.add("4");
-        stringCollectionObject2.add("5");
 
-        Assert.assertFalse(stringCollectionObject.equals(stringCollectionObject2));
-        Assert.assertTrue(stringCollectionObject.equals(stringCollectionObject3));
+        assertFalse(stringCollectionObject.equals(stringCollectionObject2));
+        assertTrue(stringCollectionObject.equals(stringCollectionObject3));
     }
 }

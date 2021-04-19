@@ -60,7 +60,6 @@ public class StringCollectionObject implements InterfaceCollection {
         if (index >= 0 & index <= this.index) {
             return fullMassive[index];
         } else {
-            System.out.println("Индекс: " + index + ", который вы хотите найти - за пределами массива: " + this.index);
             return null;
         }
     }
