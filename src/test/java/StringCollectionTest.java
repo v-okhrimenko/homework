@@ -1,10 +1,10 @@
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class StringCollectionTest {
+
     private StringCollectionObject stringCollectionObject;
     private final String sb = "Test string ";
 
@@ -12,11 +12,6 @@ public class StringCollectionTest {
     @Before
     public void setUp() {
         stringCollectionObject = new StringCollectionObject();
-    }
-
-    @After
-    public void tearDown() {
-        stringCollectionObject = null;
     }
 
     private StringCollectionObject fillStringCollection() {
@@ -31,12 +26,11 @@ public class StringCollectionTest {
     public void addObjectTest() {
         int startIndex = 0;
         for (int i = 0; i < 100; i++) {
-            startIndex++;
             assertTrue(stringCollectionObject.add(sb + i));
             assertFalse(stringCollectionObject.add(null));
             assertFalse(stringCollectionObject.add(1));
             assertTrue(stringCollectionObject.contain(sb + i));
-            assertEquals(stringCollectionObject.size(), startIndex);
+            assertEquals(stringCollectionObject.size(), ++startIndex);
         }
     }
 
@@ -44,12 +38,11 @@ public class StringCollectionTest {
     public void addObjectPositionTest() {
         int startIndex = 0;
         for (int i = 0; i < 100; i++) {
-            startIndex++;
             assertTrue(stringCollectionObject.add(i, sb + i));
             assertFalse(stringCollectionObject.add(i, null));
             assertFalse(stringCollectionObject.add(i, 1));
             assertTrue(stringCollectionObject.contain(sb + i));
-            assertEquals(stringCollectionObject.size(), startIndex);
+            assertEquals(stringCollectionObject.size(), ++startIndex);
         }
     }
 
@@ -105,5 +98,15 @@ public class StringCollectionTest {
 
         assertFalse(stringCollectionObject.equals(stringCollectionObject2));
         assertTrue(stringCollectionObject.equals(stringCollectionObject3));
+    }
+
+    @Test
+    public void addAll() {
+        stringCollectionObject = new StringCollectionObject();
+        String[] testStringArray = {"Kiev", "Odessa", "Lvov", "Kharkov", "Lutsk", "Poltava"};
+        assertFalse(stringCollectionObject.addAll(null));
+        assertTrue(stringCollectionObject.addAll(testStringArray));
+        assertEquals(testStringArray.length, stringCollectionObject.size());
+
     }
 }

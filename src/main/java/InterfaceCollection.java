@@ -4,6 +4,8 @@ public interface InterfaceCollection {
 
     boolean add(int index, Object o);
 
+    boolean addAll(String[] stringArray);
+
     boolean delete(Object o);
 
     Object get(int index);

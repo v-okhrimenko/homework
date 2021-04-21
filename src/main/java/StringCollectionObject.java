@@ -12,8 +12,7 @@ public class StringCollectionObject implements InterfaceCollection {
     public boolean add(Object o) {
         if (isString(o)) {
             chekAddSize();
-            fullMassive[index] = o.toString();
-            index++;
+            fullMassive[index++] = o.toString();
             return true;
         }
         return false;
@@ -29,12 +28,10 @@ public class StringCollectionObject implements InterfaceCollection {
                 String[] temp = new String[this.index];
                 System.arraycopy(fullMassive, index, temp, 0, this.index - index);
                 fullMassive[index] = o.toString();
-                System.arraycopy(temp, 0, fullMassive, index + 1, this.index - index);
-                this.index++;
+                System.arraycopy(temp, 0, fullMassive, index + 1, this.index++ - index);
                 return true;
-            } else if (index == this.index) {
+            } else if (index == this.index++) {
                 fullMassive[index + 1] = o.toString();
-                this.index++;
                 return true;
             }
         }
@@ -47,8 +44,7 @@ public class StringCollectionObject implements InterfaceCollection {
             if (contain(o)) {
                 int indexForDelete = indexOf(o);
                 chekDeleteSize();
-                System.arraycopy(fullMassive, indexForDelete + 1, fullMassive, indexForDelete, index - indexForDelete);
-                index--;
+                System.arraycopy(fullMassive, indexForDelete + 1, fullMassive, indexForDelete, index-- - indexForDelete);
                 return true;
             }
         }
@@ -101,6 +97,17 @@ public class StringCollectionObject implements InterfaceCollection {
     @Override
     public int size() {
         return index;
+    }
+
+    public boolean addAll(String[] strings) {
+        if (Objects.nonNull(strings)) {
+            for (String string : strings) {
+                chekAddSize();
+                fullMassive[index++] = string;
+            }
+            return true;
+        }
+        return false;
     }
 
     private String[] getArrayNoNull() {
