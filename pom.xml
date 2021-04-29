@@ -18,7 +18,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>com.test.Main</mainClass>
+                                <mainClass>com.letters.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
