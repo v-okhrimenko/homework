@@ -81,7 +81,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("Введите чило: ");
+            System.out.println("Введите число: ");
             String digitString = scanner.nextLine().trim();
             if (checkDigit(digitString)) {
                 printDigits(digitString);
@@ -108,12 +108,10 @@ public class Main {
     }
 
     private static boolean checkDigit(String digitString) {
-        try {
-            Integer.valueOf(digitString);
+        if (digitString.matches("\\d+")) {
             return true;
-        } catch (NumberFormatException e) {
-            System.out.println("Вы ввели не число!");
-            return false;
         }
+        System.out.println("Вы ввели не число!");
+        return false;
     }
 }
