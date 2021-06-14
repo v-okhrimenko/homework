@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class TaskUser {
     public static void main(String[] args) {
 
-        //File file = new File("src/main/java/ua/ithillel/task4/users2.txt");
-        File pathToFile = new File("null");
+        File pathToFile = new File("src/main/java/ua/ithillel/task4/users.txt");
+        //File pathToFile = new File("students.txt");
         AccountingUser user = new AccountingUser(pathToFile);
 
         boolean noExit = true;

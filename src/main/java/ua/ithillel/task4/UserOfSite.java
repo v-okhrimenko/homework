@@ -1,17 +1,16 @@
 package ua.ithillel.task4;
 
 public class UserOfSite {
-    private static int id = 0;
     private int userId;
     private String name;
     private int lessons;
     private long startPosition;
 
-    public UserOfSite(String name, int lessons, long startPosition) {
+    public UserOfSite(int id, String name, int lessons, long startPosition) {
+        this.userId = id;
         this.name = name;
         this.lessons = lessons;
         this.startPosition = startPosition;
-        userId = id++;
 
     }
 

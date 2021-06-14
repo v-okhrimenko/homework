@@ -7,8 +7,8 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 public class AccountingUser {
-    private final RandomAccessFile file;
     private static final ArrayList<UserOfSite> userOfSites = new ArrayList<>();
+    private final RandomAccessFile file;
 
     public AccountingUser(File path) {
         if (path.exists()) {
@@ -34,7 +34,7 @@ public class AccountingUser {
                     String fullData = file.readLine();
                     name = fullData.substring(0, fullData.indexOf(":"));
                     count = Integer.parseInt(fullData.substring(name.length() + 1));
-                    userOfSites.add(new UserOfSite(name, count, pointer));
+                    userOfSites.add(new UserOfSite(userOfSites.size(), name, count, pointer));
                 }
             } else {
                 System.out.println("List of users is empty.");
@@ -83,7 +83,7 @@ public class AccountingUser {
             } else {
                 UserOfSite newUserOfSite;
                 try {
-                    newUserOfSite = new UserOfSite(nameUser, 1, file.getFilePointer() + 1);
+                    newUserOfSite = new UserOfSite(userOfSites.size(), nameUser, 1, file.getFilePointer() + 1);
                     userOfSites.add(newUserOfSite);
                     file.seek(file.length());
                     file.writeBytes("\n" + newUserOfSite);
@@ -94,7 +94,7 @@ public class AccountingUser {
         } else {
             UserOfSite newUserOfSite;
             try {
-                newUserOfSite = new UserOfSite(nameUser, 1, 0);
+                newUserOfSite = new UserOfSite(userOfSites.size(), nameUser, 1, 0);
                 userOfSites.add(newUserOfSite);
                 file.seek(0);
                 file.writeBytes(newUserOfSite.toString());
