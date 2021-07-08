@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ua.ithillel.dao.EmployeeSimpleDaoTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-07-08T19:33:48" hostname="MacBook-Air-Ulia.local" time="0.08">
+  <properties/>
+  <testcase name="updateNotPresentEmployee()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.051"/>
+  <testcase name="findEmployees()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.003"/>
+  <testcase name="delete()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.002"/>
+  <testcase name="getEmployee()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.003"/>
+  <testcase name="update()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.001"/>
+  <testcase name="addEmployee()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.002"/>
+  <testcase name="addEmployeeNull()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.002"/>
+  <testcase name="deleteWrongId()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.002"/>
+  <testcase name="getEmployeeWrongId()" classname="ua.ithillel.dao.EmployeeSimpleDaoTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

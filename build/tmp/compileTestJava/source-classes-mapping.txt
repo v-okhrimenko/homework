@@ -1,0 +1,2 @@
+ua/ithillel/dao/EmployeeSimpleDaoTest.java
+ ua.ithillel.dao.EmployeeSimpleDaoTest
