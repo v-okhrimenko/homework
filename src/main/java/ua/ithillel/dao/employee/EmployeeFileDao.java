@@ -1,10 +1,10 @@
-package ua.ithillel.dao;
+package ua.ithillel.dao.employee;
 
 import ua.ithillel.model.Employee;
 
 import java.util.List;
 
-public class EmployeeDatabaseDao implements EmployeeDao{
+public class EmployeeFileDao implements EmployeeDao{
     @Override
     public Long addEmployee(Employee employee) {
         return null;

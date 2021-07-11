@@ -2,6 +2,7 @@ package ua.ithillel.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ua.ithillel.dao.employee.EmployeeSimpleDao;
 import ua.ithillel.model.Employee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

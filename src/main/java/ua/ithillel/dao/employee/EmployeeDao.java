@@ -1,4 +1,4 @@
-package ua.ithillel.dao;
+package ua.ithillel.dao.employee;
 
 import ua.ithillel.model.Employee;
 

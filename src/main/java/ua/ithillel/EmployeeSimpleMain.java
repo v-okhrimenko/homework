@@ -57,5 +57,15 @@ public class EmployeeSimpleMain {
         Employee e25 = new Employee("Греков Артём Маркович", 17000, 4L, e19Id);
         Long e25Id = ems.add(e25);
 
+        Employee employee = new Employee("eee", 123, 1L, null);
+
+        ems.add(employee);
+        employee.setId(null);
+//        e1.setName("TEST");
+//        ems.update(e1);
+        System.out.println(employee);
+        ems.update(employee);
+        System.out.println(ems.findAll());
+
     }
 }

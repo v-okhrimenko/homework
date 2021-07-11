@@ -19,4 +19,9 @@ public class Employee {
         this.departmentId = departmentId;
         this.chiefId = chiefId;
     }
+
+    public Employee(Long id, String name, Integer salary, Long departmentId, Long chiefId) {
+        this(name, salary, departmentId, chiefId);
+        this.id = id;
+    }
 }

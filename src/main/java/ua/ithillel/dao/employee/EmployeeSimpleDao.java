@@ -1,4 +1,4 @@
-package ua.ithillel.dao;
+package ua.ithillel.dao.employee;
 
 import ua.ithillel.model.Employee;
 
@@ -30,9 +30,20 @@ public class EmployeeSimpleDao implements EmployeeDao {
 
     @Override
     public void update(Employee employee) {
-        if (employeeList.size() > 0) {
-            employeeList.set(employeeList.indexOf(employee), employee);
+        Employee oldEmployee = getEmployee(employee.getId());
+        if (Objects.nonNull(oldEmployee)) {
+            if (oldEmployee.getId() != null) {
+                oldEmployee.setName(employee.getName());
+                oldEmployee.setSalary(employee.getSalary());
+                oldEmployee.setDepartmentId(employee.getDepartmentId());
+                oldEmployee.setChiefId(employee.getChiefId());
+            }
         }
+//        long id = employee.getId();
+//        if (employeeList.size() > 0) {
+//            System.out.println("ID " + id);
+//            employeeList.set(employeeList.indexOf(employee), employee);
+//        }
     }
 
     @Override
