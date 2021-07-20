@@ -19,17 +19,17 @@ public class DepartmentSimpleMain {
         Department d6 = new Department("Отдел кадров");
         dms.add(d6);
 
-        System.out.println(dms.findAll());
-        System.out.println("____________");
-
-        d1.setName("New department");
-        dms.update(d1);
-        System.out.println(dms.findAll());
-        System.out.println("____________");
-
-        dms.delete(d2.getId());
-        System.out.println(dms.findAll());
-        System.out.println("____________");
+//        System.out.println(dms.findAll());
+//        System.out.println("____________");
+//
+//        d1.setName("New department");
+//        dms.update(d1);
+//        System.out.println(dms.findAll());
+//        System.out.println("____________");
+//
+//        dms.delete(d2.getId());
+//        System.out.println(dms.findAll());
+//        System.out.println("____________");
 
     }
 }

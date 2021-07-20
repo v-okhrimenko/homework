@@ -1,18 +1,19 @@
 package ua.ithillel.dao.employee;
 
+import ua.ithillel.exeption.EmployeeDaoException;
 import ua.ithillel.model.Employee;
 
 import java.util.List;
 
 public interface EmployeeDao {
 
-    Long addEmployee(Employee employee);
+    Long addEmployee(Employee employee) throws EmployeeDaoException;
 
-    void update(Employee employee);
+    void update(Employee employee) throws EmployeeDaoException;
 
-    void delete(Long id);
+    void delete(Long id) throws EmployeeDaoException;
 
-    Employee getEmployee(Long id);
+    Employee getEmployee(Long id) throws EmployeeDaoException;
 
-    List<Employee> findEmployees();
+    List<Employee> findEmployees() throws EmployeeDaoException;
 }

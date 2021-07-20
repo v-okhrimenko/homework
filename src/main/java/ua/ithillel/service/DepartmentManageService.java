@@ -5,7 +5,6 @@ import ua.ithillel.dao.department.DepartmentDaoFactory;
 import ua.ithillel.model.Department;
 
 import java.util.List;
-import java.util.Objects;
 
 public class DepartmentManageService {
     private final DepartmentDao departmentDao;
@@ -42,16 +41,7 @@ public class DepartmentManageService {
     }
 
     public void update(Department department) {
-        if (Objects.nonNull(department)) {
-            if (department.getId() != null) {
-                departmentDao.update(department);
-                System.out.println("department " + department.getId() + " updated successful");
-            } else {
-                System.out.println("Cant update, department id cant be NULL");
-            }
-        } else {
-            System.out.println("Cant update, department not found");
-        }
+        departmentDao.update(department);
     }
 
     public List<Department> findAll() {

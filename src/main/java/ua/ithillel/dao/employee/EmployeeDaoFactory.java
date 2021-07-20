@@ -8,8 +8,8 @@ public class EmployeeDaoFactory {
 
     private EmployeeDaoFactory() {
 
-        employeeDao = new EmployeeSimpleDao();
-        //employeeDao = new EmployeeDatabaseDao();
+        //employeeDao = new EmployeeSimpleDao();
+        employeeDao = new EmployeeDatabaseDao();
     }
 
     public static synchronized EmployeeDaoFactory getInstance() {

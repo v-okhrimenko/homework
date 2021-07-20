@@ -7,6 +7,7 @@ import ua.ithillel.model.Department;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static ua.ithillel.util.AppConstant.COLUMN_ID;
 import static ua.ithillel.util.AppConstant.COLUMN_NAME;
@@ -23,37 +24,103 @@ public class DepartmentDatabaseDao implements DepartmentDao {
 
     @Override
     public Long addDepartment(Department department) {
-        return null;
+        // function adddepartment:
+        /*
+        begin
+        INSERT INTO department (name)
+        SELECT  new_dep_name
+        WHERE   new_dep_name NOT IN ( SELECT  name FROM department);
+		SELECT id into new_dep_id from department where name = new_dep_name;
+        end;
+         */
+
+        long id = -1L;
+        try (
+                Connection con = getConnection();
+                CallableStatement stmt = con.prepareCall("{call adddepartment(?,?)}");
+        ) {
+            stmt.setString(1, department.getName());
+            stmt.registerOutParameter(2, Types.BIGINT);
+
+            stmt.execute();
+            id = (long) stmt.getObject(2);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     @Override
-    public void update(Department department) {
+    // function updatedepartment:
+    /*
+    begin
+    UPDATE department SET name = dep_new_name
+    WHERE id = dep_id;
+    result = TRUE;
+    end;
+     */
 
+    public void update(Department department) {
+        if (Objects.isNull(department)) {
+            System.out.println("Department NULL");
+        }
+        else if (department.getId() == null) {
+            System.out.println("Department ID is NULL");
+        }
+        else {
+            try (
+                    Connection con = getConnection();
+                    CallableStatement stmt = con.prepareCall("{call updatedepartment(?,?,?)}");
+            ) {
+                stmt.setLong(1,department.getId());
+                stmt.registerOutParameter(3, Types.BOOLEAN);
+                stmt.setString(2, department.getName());
+                stmt.execute();
+                System.out.println("department " + department.getId() + " updated: " +stmt.getBoolean(3));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void delete(Long id) {
 
+        try (
+                Connection con = getConnection();
+                CallableStatement stmt = con.prepareCall("{call deletedepartmentbyid(?,?)}");
+        ) {
+            stmt.setLong(1, id);
+            stmt.registerOutParameter(2, Types.BOOLEAN);
+            stmt.execute();
+
+            System.out.println(stmt.getBoolean(2));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Department getDepartment(Long id) {
+        Department department = new Department();
         try (
                 Connection con = getConnection();
-                PreparedStatement stmt = con.prepareStatement(SELECT_ONE);
+                CallableStatement stmt = con.prepareCall("{call findnamebyid(?,?)}");
         ) {
             stmt.setLong(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return new Department(
-                        rs.getLong(COLUMN_ID),
-                        rs.getString(COLUMN_NAME)
-                );
-            }
+            stmt.registerOutParameter(2, Types.VARCHAR);
+            stmt.execute();
+
+            //String name = stmt.getString(2);
+            department.setId(id);
+            department.setName(stmt.getString(2));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return department;
     }
 
     @Override

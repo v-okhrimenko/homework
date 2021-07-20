@@ -2,6 +2,8 @@ package ua.ithillel.service;
 
 import ua.ithillel.dao.employee.EmployeeDao;
 import ua.ithillel.dao.employee.EmployeeDaoFactory;
+import ua.ithillel.exeption.EmployeeBusinessException;
+import ua.ithillel.exeption.EmployeeDaoException;
 import ua.ithillel.model.Employee;
 
 import java.util.List;
@@ -14,28 +16,41 @@ public class EmployeeManageService {
         this.employeeDao = EmployeeDaoFactory.getInstance().getEmployeeDao();
     }
 
-    public Long add(Employee employee) {
+    public Long add(Employee employee) throws EmployeeBusinessException {
         // do some work to validate employee
 
-        Long id = employeeDao.addEmployee(employee);
+        Long id = null;
+        try {
+            id = employeeDao.addEmployee(employee);
+        } catch (EmployeeDaoException e) {
+            throw new EmployeeBusinessException(e);
+        }
         return id;
     }
 
-    private boolean checkEmployeeId(Long id) {
+    private boolean checkEmployeeId(Long id) throws EmployeeBusinessException {
         return findAll().stream().anyMatch(e -> e.getId().equals(id));
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws EmployeeBusinessException {
         if (checkEmployeeId(id)) {
-            employeeDao.delete(id);
+            try {
+                employeeDao.delete(id);
+            } catch (EmployeeDaoException e) {
+                throw new EmployeeBusinessException(e);
+            }
         } else {
             System.out.println("Cant delete, id: " + id + " not found");
         }
     }
 
-    public Employee get(Long id) {
+    public Employee get(Long id) throws EmployeeBusinessException {
         if (checkEmployeeId(id)) {
-            return employeeDao.getEmployee(id);
+            try {
+                return employeeDao.getEmployee(id);
+            } catch (EmployeeDaoException e) {
+                throw new EmployeeBusinessException(e);
+            }
         } else {
             System.out.println("Employee with id: " + id + " not found");
             return null;
@@ -43,10 +58,14 @@ public class EmployeeManageService {
 
     }
 
-    public void update(Employee employee) {
+    public void update(Employee employee) throws EmployeeBusinessException {
         if (Objects.nonNull(employee)) {
             if (employee.getId() != null) {
-                employeeDao.update(employee);
+                try {
+                    employeeDao.update(employee);
+                } catch (EmployeeDaoException e) {
+                    throw new EmployeeBusinessException(e);
+                }
                 System.out.println("Employee " + employee.getId() + " updated successful");
             }
         } else {
@@ -62,8 +81,12 @@ public class EmployeeManageService {
 
     }
 
-    public List<Employee> findAll() {
-        return employeeDao.findEmployees();
+    public List<Employee> findAll() throws EmployeeBusinessException {
+        try {
+            return employeeDao.findEmployees();
+        } catch (EmployeeDaoException e) {
+            throw new EmployeeBusinessException(e);
+        }
     }
 
 }
