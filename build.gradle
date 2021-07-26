@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'ua.ithillel'
+version '1.0-SNAPSHOT'
+
+war {
+    archiveFileName = 'servlet-crud.war'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
+    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '5.0.0'
+
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/apache-jstl
+    implementation group: 'org.eclipse.jetty', name: 'apache-jstl', version: '11.0.0'
+
+//    // https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec
+//    implementation group: 'org.apache.taglibs', name: 'taglibs-standard-spec', version: '1.2.5'
+//
+//    // https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl
+//    implementation group: 'org.apache.taglibs', name: 'taglibs-standard-impl', version: '1.2.5'
+
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.22'
+
+    // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
+    implementation group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '10.0.8'
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
